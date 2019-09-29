@@ -34,6 +34,17 @@ describe('DateFormat', () => {
             expect(DateFormat.timestampToTime(new Date('2019-01-01 15:30').getTime(), 'en-US')).toBe('3:30 PM');
         });
     });
+    describe('timestampToWeekday', () => {
+        it('de with default options', () => {
+            expect(DateFormat.timestampToWeekday(new Date('2019-01-01 15:30').getTime(), 'de')).toBe('Dienstag');
+        });
+        it('en-gb with default options', () => {
+            expect(DateFormat.timestampToWeekday(new Date('2019-01-01 15:30').getTime(), 'en-GB')).toBe('Tuesday');
+        });
+        it('en-us with default options', () => {
+            expect(DateFormat.timestampToWeekday(new Date('2019-01-01 15:30').getTime(), 'en-US')).toBe('Tuesday');
+        });
+    });
     describe('millisecondsToFullMinutes', () => {
         it('de with default options', () => {
             const now = Date.now();
