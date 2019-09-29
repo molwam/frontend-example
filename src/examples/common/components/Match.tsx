@@ -27,6 +27,14 @@ const Team = styled.div`
     margin-right: 10px;
 `;
 
+const Location = styled.div`
+    margin-right: 10px;
+`;
+
+const League = styled.div`
+    margin-right: 10px;
+`;
+
 const Score = styled.div``;
 
 const MatchTime: React.FC<Props> = ({match}) => {
@@ -48,6 +56,10 @@ const Match: React.FC<Props> = ({match}) => {
             <Row>
                 <Team>{match.homeTeam.label}</Team>
                 <Team>{match.awayTeam.label}</Team>
+            </Row>
+            <Row>
+                <Location>{match.country.label}</Location>
+                <League>{match.league.label}</League>
             </Row>
         </Container>
     );
