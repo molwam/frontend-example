@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {AppState} from '../store';
 import * as ProgramTypes from '../../../api/program/Types';
 import {ProgramActionTypes} from '../store/program/Types';
-import {addMatch, getMatches} from '../store/program/Actions';
+import {addMatch, getMatches, startAutoFetch, stopAutoFetch} from '../store/program/Actions';
 import {ThunkDispatch} from 'redux-thunk';
 
 export interface OwnProps {}
@@ -14,6 +14,8 @@ interface StateProps {
 interface DispatchProps {
     addMatch: (match: ProgramTypes.Match) => void;
     getMatches: () => void;
+    startAutoFetch: () => void;
+    stopAutoFetch: () => void;
 }
 
 export type InjectedProps = StateProps & DispatchProps;
@@ -31,6 +33,12 @@ export default connect<StateProps, DispatchProps, OwnProps, AppState>(
             },
             getMatches: () => {
                 dispatch(getMatches());
+            },
+            startAutoFetch: () => {
+                dispatch(startAutoFetch());
+            },
+            stopAutoFetch: () => {
+                stopAutoFetch();
             }
         };
     }

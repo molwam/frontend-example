@@ -10,20 +10,32 @@ const NoMatches = styled.div``;
 interface Props {
     matches: ProgramTypes.Match[];
     getMatches: () => void;
+    startAutoFetch: () => void;
+    stopAutoFetch: () => void;
 }
 
-const MatchList: React.FC<Props> = ({matches, getMatches}) => {
-    return (
-        <Container>
-            {matches.length === 0 ? (
-                <NoMatches>No matches available</NoMatches>
-            ) : (
-                matches.map((match: ProgramTypes.Match) => <Match key={match.id} match={match} />)
-            )}
+class MatchList extends React.Component<Props> {
+    componentDidMount() {
+        this.props.startAutoFetch();
+    }
 
-            <button onClick={getMatches}>Get/Update Matches</button>
-        </Container>
-    );
-};
+    componentWillUnmount() {
+        this.props.stopAutoFetch();
+    }
+
+    render() {
+        return (
+            <Container>
+                {this.props.matches.length === 0 ? (
+                    <NoMatches>No matches available</NoMatches>
+                ) : (
+                    this.props.matches.map((match: ProgramTypes.Match) => <Match key={match.id} match={match} />)
+                )}
+
+                <button onClick={this.props.getMatches}>Get/Update Matches</button>
+            </Container>
+        );
+    }
+}
 
 export default MatchList;

@@ -2,6 +2,8 @@ import {ADD_MATCH, ProgramThunkActionTypes, ProgramActionTypes} from './Types';
 import * as ProgramTypes from '../../../../api/program/Types';
 import * as ProgramAPI from '../../../../api/program/API';
 
+let timer: number;
+
 export function addMatch(match: ProgramTypes.Match): ProgramActionTypes {
     return {
         type: ADD_MATCH,
@@ -17,4 +19,16 @@ export const getMatches = (): ProgramThunkActionTypes => {
             dispatch(addMatch(match));
         });
     };
+};
+
+export const startAutoFetch = (): ProgramThunkActionTypes => {
+    return dispatch => {
+        clearInterval(timer);
+        dispatch(getMatches());
+        timer = setInterval(() => dispatch(getMatches()), 60000);
+    };
+};
+
+export const stopAutoFetch = () => {
+    clearInterval(timer);
 };
